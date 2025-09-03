@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}My Portfolio{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+<body>
+  <!-- Matrix Digital Rain Background -->
+  <canvas id="matrix"></canvas>
+
+  <header>
+    <nav>
+      <a href="/" class="{% if request.path == '/' %}active{% endif %}">Home</a>
+      <a href="/about" class="{% if request.path.startswith('/about') %}active{% endif %}">About</a>
+      <a href="/skills" class="{% if request.path.startswith('/skills') %}active{% endif %}">Skills</a>
+      <a href="/projects" class="{% if request.path.startswith('/projects') %}active{% endif %}">Projects</a>
+      <a href="/certificates" class="{% if request.path.startswith('/certificates') %}active{% endif %}">Certificates</a>
+      <a href="/contact" class="{% if request.path.startswith('/contact') %}active{% endif %}">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer>
+  <p>© 2025 Arun Sudhakar. All rights reserved.</p>
+  <div class="social-links">
+    <a href="https://www.facebook.com/profile.php?id=100015337875064" target="_blank"><i class="fab fa-facebook"></i></a>
+    <a href="https://www.instagram.com/aroon_.ig/" target="_blank"><i class="fab fa-instagram"></i></a>
+    <a href="https://github.com/Arun18gh" target="_blank"><i class="fab fa-github"></i></a>
+    <a href="https://www.linkedin.com/in/arun-sudhakar/" target="_blank"><i class="fab fa-linkedin"></i></a>
+    <a href="https://x.com/Arun_sudhakar_" target="_blank"><i class="fab fa-x-twitter"></i></a>
+    <a href="mailto:arunsudhakar.ie@gmail.com"><i class="fas fa-envelope"></i></a>
+  </div>
+</footer>
+
+
+<!-- Matrix Script -->
+<canvas id="devbg"></canvas>
+<script>
+  const canvas = document.getElementById("devbg");
+  const ctx = canvas.getContext("2d");
+
+  canvas.height = window.innerHeight;
+  canvas.width = window.innerWidth;
+
+  const snippets = ["const", "def", "if()", "404", "sudo", "login()", "void", "root", "class", "import"];
+  const code = [];
+
+  for (let i = 0; i < 60; i++) {
+    code.push({
+      text: snippets[Math.floor(Math.random() * snippets.length)],
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      speed: 0.2 + Math.random() * 0.5,
+      size: 12 + Math.random() * 10
+    });
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "rgba(10,17,37,0.9)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    code.forEach(s => {
+      ctx.fillStyle = "rgba(56,189,248,0.7)";
+      ctx.font = s.size + "px monospace";
+      ctx.fillText(s.text, s.x, s.y);
+      s.y += s.speed;
+      if (s.y > canvas.height) {
+        s.y = 0;
+        s.x = Math.random() * canvas.width;
+      }
+    });
+  }
+
+  setInterval(draw, 40);
+
+  window.addEventListener("resize", () => {
+    canvas.height = window.innerHeight;
+    canvas.width = window.innerWidth;
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-text">
+    <h1>Hi, I'm <span>Arun Sudhakar</span></h1>
+    <p class="subtitle">Aspiring Cybersecurity Professional & Full Stack Developer</p>
+    <p class="bio">
+      I specialize in building secure, scalable applications and enjoy 
+      solving real-world challenges in cybersecurity and full-stack development. 
+      With experience in backend systems, cloud deployment, and IT consulting, 
+      I’m passionate about blending technology with problem-solving to create impactful solutions.
+    </p>
+    <div class="hero-buttons">
+      <a href="/about">About Me</a>
+      <a href="{{ url_for('static', filename='cv/arun-sudhakar-cv.pdf') }}" target="_blank">Download CV</a>
+    </div>
+  </div>
+
+  <div class="hero-img">
+    <img src="{{ url_for('static', filename='images/profile/IMG-20250621-WA0015.jpg') }}" alt="Profile Photo">
+  </div>
+</section>
+
+
+<!-- Highlights Section -->
+<section>
+  <h2>Highlights</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>🎓 Education</h3>
+      <p>B.Sc. Computer Science (2021–2024)<br>MS Cybersecurity (2025–2026)</p>
+    </div>
+    <div class="card">
+      <h3>💼 Experience</h3>
+      <p>Full Stack Internship at Trishana Technologies (2024)</p>
+    </div>
+    <div class="card">
+      <h3>🏆 Certifications</h3>
+      <p>Cybersecurity (Google), Python (Guvi), Java (Digital CADD), Fullstack (IIT-M)</p>
+    </div>
+    <div class="card">
+      <h3>🚀 Workshops</h3>
+      <p>AI/ML (Mannar Thirumalai College), Fullstack (IIT-M), Robotics & Automation</p>
+    </div>
+  </div>
+</section>
+
+<!-- Stats Section -->
+<section id="stats">
+  <h2>Stats</h2>
+  <div class="stats-grid">
+    <div class="stat-card blue">
+      <h3>20+</h3>
+      <p>Certificates</p>
+    </div>
+    <div class="stat-card red">
+      <h3>16+</h3>
+      <p>Projects</p>
+    </div>
+    <div class="stat-card green">
+      <h3>10+</h3>
+      <p>Seminars</p>
+    </div>
+    <div class="stat-card purple">
+      <h3>4+</h3>
+      <p>Workshops</p>
+    </div>
+  </div>
+</section>
+
+
+{% endblock %}
