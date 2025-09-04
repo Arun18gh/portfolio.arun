@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request
 import smtplib, sqlite3, os
+import time, requests
+from threading import Thread
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from dotenv import load_dotenv
@@ -181,6 +183,22 @@ def contact():
 
     return render_template("contact.html")
 
+# ---------- KEEP ALIVE ----------
+def keep_awake(url, interval=600):
+    """Ping the app periodically to prevent Render free tier from sleeping."""
+    def ping():
+        while True:
+            try:
+                requests.get(url)
+            except Exception:
+                pass
+            time.sleep(interval)
+
+    t = Thread(target=ping)
+    t.daemon = True
+    t.start()
+
 # --- Run Server ---
 if __name__ == "__main__":
-    app.run(port=5000, debug=True)
+    keep_awake("https://portfolio-arun-5sbj.onrender.com", 600)  # replace with your actual Render URL
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
